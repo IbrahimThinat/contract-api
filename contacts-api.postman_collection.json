@@ -1,0 +1,72 @@
+{
+    "info": {
+      "name": "Contacts API",
+      "description": "Practice collection for the local contacts-api project (Express, http://localhost:3001)",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+      { "key": "baseUrl", "value": "http://localhost:3001" }
+    ],
+    "item": [
+      {
+        "name": "List all contacts",
+        "request": { "method": "GET", "url": "{{baseUrl}}/contacts" }
+      },
+      {
+        "name": "Search contacts",
+        "request": { "method": "GET", "url": "{{baseUrl}}/contacts?search=omar" }
+      },
+      {
+        "name": "Paginate contacts",
+        "request": { "method": "GET", "url": "{{baseUrl}}/contacts?page=1&limit=2" }
+      },
+      {
+        "name": "Get one contact by id",
+        "request": { "method": "GET", "url": "{{baseUrl}}/contacts/1" }
+      },
+      {
+        "name": "Create a contact",
+        "request": {
+          "method": "POST",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Yara Saleh\",\n  \"email\": \"yara@example.com\",\n  \"phone\": \"0794444444\"\n}"
+          },
+          "url": "{{baseUrl}}/contacts"
+        }
+      },
+      {
+        "name": "Update a contact",
+        "request": {
+          "method": "PATCH",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"phone\": \"0790000000\"\n}"
+          },
+          "url": "{{baseUrl}}/contacts/1"
+        }
+      },
+      {
+        "name": "Delete a contact",
+        "request": { "method": "DELETE", "url": "{{baseUrl}}/contacts/1" }
+      },
+      {
+        "name": "Create a contact - invalid email (should 400)",
+        "request": {
+          "method": "POST",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Bad Email\",\n  \"email\": \"not-an-email\"\n}"
+          },
+          "url": "{{baseUrl}}/contacts"
+        }
+      },
+      {
+        "name": "Get a contact that doesn't exist (should 404)",
+        "request": { "method": "GET", "url": "{{baseUrl}}/contacts/999" }
+      }
+    ]
+  }
